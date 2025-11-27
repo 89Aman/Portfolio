@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Github, ExternalLink, Headphones, Film, Brain, BookOpen, Plug, Gamepad2 } from 'lucide-react';
+import GlowCard from './ui/GlowCard';
 
 const projects = [
   {
@@ -70,50 +71,53 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <motion.article
+            <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative bg-[#1f1f1f] border border-[#333333] rounded-2xl overflow-hidden hover:border-[#525252] transition-all duration-300"
             >
-              {/* Project Image/Icon Header */}
-              <div className="h-40 bg-gradient-to-br from-[#262626] to-[#1a1a1a] flex items-center justify-center relative overflow-hidden">
-                <project.icon size={48} className="text-[#525252] group-hover:text-[#a3a3a3] transition-colors duration-300" />
-                
-                {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-[#171717]/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#171717] hover:scale-110 transition-transform duration-300"
-                  >
-                    <Github size={20} />
-                  </a>
-                </div>
-              </div>
+              <GlowCard className="h-full bg-[#1f1f1f] border border-[#333333]">
+                <article className="group h-full">
+                  {/* Project Image/Icon Header */}
+                  <div className="h-40 bg-gradient-to-br from-[#262626] to-[#1a1a1a] flex items-center justify-center relative overflow-hidden rounded-t-2xl">
+                    <project.icon size={48} className="text-[#525252] group-hover:text-[#a3a3a3] transition-colors duration-300" />
+                    
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-[#171717]/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-[#171717] hover:scale-110 transition-transform duration-300"
+                      >
+                        <Github size={20} />
+                      </a>
+                    </div>
+                  </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#d4d4d4] transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-sm text-[#a3a3a3] mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 bg-[#262626] text-[#a3a3a3] text-xs rounded-full font-mono"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.article>
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-white mb-3 group-hover:text-[#d4d4d4] transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-[#a3a3a3] mb-4 leading-relaxed">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-[#262626] text-[#a3a3a3] text-xs rounded-full font-mono"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              </GlowCard>
+            </motion.div>
           ))}
         </div>
 

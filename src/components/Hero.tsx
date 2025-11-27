@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import ParticleBackground from './ui/ParticleBackground';
+import MagneticButton from './ui/MagneticButton';
 
 const roles = [
   'ML Engineer',
@@ -13,6 +15,19 @@ export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    setMousePosition({
+      x: (e.clientX / window.innerWidth) * 2 - 1,
+      y: -(e.clientY / window.innerHeight) * 2 + 1,
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [handleMouseMove]);
 
   useEffect(() => {
     const currentRole = roles[roleIndex];
@@ -34,8 +49,12 @@ export default function Hero() {
         }, 50);
         return () => clearTimeout(timeout);
       } else {
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-        setIsTyping(true);
+        // Use setTimeout to avoid synchronous setState in effect
+        const timeout = setTimeout(() => {
+          setRoleIndex((prev) => (prev + 1) % roles.length);
+          setIsTyping(true);
+        }, 0);
+        return () => clearTimeout(timeout);
       }
     }
   }, [displayText, isTyping, roleIndex]);
@@ -44,6 +63,11 @@ export default function Hero() {
     <section id="home" className="min-h-screen flex flex-col justify-center relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#171717] via-[#1f1f1f] to-[#171717]" />
+      
+      {/* 3D Particle Background */}
+      <Suspense fallback={null}>
+        <ParticleBackground mouse={mousePosition} />
+      </Suspense>
       
       {/* Subtle grid pattern */}
       <div 
@@ -110,18 +134,16 @@ export default function Hero() {
               transition={{ delay: 0.6 }}
               className="flex flex-wrap gap-4 mb-10"
             >
-              <a
-                href="#projects"
-                className="px-8 py-3 bg-white text-[#171717] rounded-full font-semibold hover:bg-[#d4d4d4] transition-all duration-300 hover:scale-105"
-              >
-                View My Work
-              </a>
-              <a
-                href="#contact"
-                className="px-8 py-3 border border-[#404040] text-white rounded-full font-semibold hover:bg-[#262626] transition-all duration-300"
-              >
-                Get In Touch
-              </a>
+              <MagneticButton href="#projects">
+                <span className="px-8 py-3 bg-white text-[#171717] rounded-full font-semibold hover:bg-[#d4d4d4] transition-all duration-300 inline-block">
+                  View My Work
+                </span>
+              </MagneticButton>
+              <MagneticButton href="#contact">
+                <span className="px-8 py-3 border border-[#404040] text-white rounded-full font-semibold hover:bg-[#262626] transition-all duration-300 inline-block">
+                  Get In Touch
+                </span>
+              </MagneticButton>
             </motion.div>
 
             <motion.div
@@ -130,28 +152,21 @@ export default function Hero() {
               transition={{ delay: 0.7 }}
               className="flex items-center gap-4"
             >
-              <a
-                href="https://github.com/89Aman"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262626] text-[#a3a3a3] hover:bg-[#404040] hover:text-white transition-all duration-300"
-              >
-                <Github size={20} />
-              </a>
-              <a
-                href="https://linkedin.com/in/sharmaaman012"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262626] text-[#a3a3a3] hover:bg-[#404040] hover:text-white transition-all duration-300"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="mailto:Sharmaaman42@proton.me"
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262626] text-[#a3a3a3] hover:bg-[#404040] hover:text-white transition-all duration-300"
-              >
-                <Mail size={20} />
-              </a>
+              <MagneticButton href="https://github.com/89Aman">
+                <span className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262626] text-[#a3a3a3] hover:bg-[#404040] hover:text-white transition-all duration-300">
+                  <Github size={20} />
+                </span>
+              </MagneticButton>
+              <MagneticButton href="https://linkedin.com/in/sharmaaman012">
+                <span className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262626] text-[#a3a3a3] hover:bg-[#404040] hover:text-white transition-all duration-300">
+                  <Linkedin size={20} />
+                </span>
+              </MagneticButton>
+              <MagneticButton href="mailto:Sharmaaman42@proton.me">
+                <span className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262626] text-[#a3a3a3] hover:bg-[#404040] hover:text-white transition-all duration-300">
+                  <Mail size={20} />
+                </span>
+              </MagneticButton>
             </motion.div>
           </motion.div>
 

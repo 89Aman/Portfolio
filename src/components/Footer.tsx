@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import VisitorCounter from './VisitorCounter';
 
 const quickLinks = [
   { name: 'Home', href: '#home' },
@@ -71,8 +72,13 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Visitor Counter */}
+        <div className="pt-8 pb-6 border-t border-[#262626]">
+          <VisitorCounter />
+        </div>
+
         {/* Bottom */}
-        <div className="pt-8 border-t border-[#262626] flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="pt-6 border-t border-[#262626] flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-[#525252]">
             © {new Date().getFullYear()} Aman Sharma. All rights reserved.
           </p>
