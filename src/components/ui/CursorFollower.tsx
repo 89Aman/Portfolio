@@ -24,12 +24,8 @@ export default function CursorFollower({ className = '' }: CursorFollowerProps) 
       if (!isVisible) {
         setIsVisible(true);
       }
-    };
-
-    const handleMouseEnter = () => setIsVisible(true);
-    const handleMouseLeave = () => setIsVisible(false);
-
-    const updateInteractiveState = (e: MouseEvent) => {
+      
+      // Check if hovering over interactive element
       const target = e.target as HTMLElement;
       const isInteractive = 
         target.tagName === 'A' ||
@@ -41,14 +37,15 @@ export default function CursorFollower({ className = '' }: CursorFollowerProps) 
       setIsHoveringInteractive(!!isInteractive);
     };
 
+    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseLeave = () => setIsVisible(false);
+
     document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousemove', updateInteractiveState);
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousemove', updateInteractiveState);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
     };

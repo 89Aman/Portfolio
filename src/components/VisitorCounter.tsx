@@ -13,6 +13,7 @@ export default function VisitorCounter({ className = '' }: VisitorCounterProps) 
 
   useEffect(() => {
     // Generate a pseudo-random visitor count based on current date and local storage
+    // This creates a realistic-looking visitor counter for demo purposes
     const initVisitorCount = () => {
       try {
         const storageKey = 'portfolio_visitor_data';
@@ -20,16 +21,23 @@ export default function VisitorCounter({ className = '' }: VisitorCounterProps) 
         const now = new Date();
         const todayKey = now.toISOString().split('T')[0];
         
+        // Initial base count represents a reasonable starting visitor number for a portfolio
+        // The random component ensures each new visitor gets a unique starting point
+        const INITIAL_BASE_COUNT = 2000;
+        const INITIAL_VARIANCE = 500;
+        
         const data = storedData ? JSON.parse(storedData) : {
-          baseCount: 1847 + Math.floor(Math.random() * 500), // Random starting point
+          baseCount: INITIAL_BASE_COUNT + Math.floor(Math.random() * INITIAL_VARIANCE),
           lastDate: todayKey,
           dailyViews: 1,
           totalViews: 1
         };
         
-        // If it's a new day, increment base count with yesterday's views
+        // If it's a new day, increment base count with yesterday's views plus organic growth
+        const DAILY_ORGANIC_MIN = 5;
+        const DAILY_ORGANIC_MAX = 20;
         if (data.lastDate !== todayKey) {
-          data.baseCount += data.dailyViews + Math.floor(Math.random() * 15) + 5;
+          data.baseCount += data.dailyViews + Math.floor(Math.random() * (DAILY_ORGANIC_MAX - DAILY_ORGANIC_MIN)) + DAILY_ORGANIC_MIN;
           data.dailyViews = 1;
           data.lastDate = todayKey;
         } else {
