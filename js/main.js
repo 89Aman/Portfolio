@@ -39,14 +39,18 @@ function initNavigation() {
         });
     });
 
-    // Navbar scroll effect
-    window.addEventListener('scroll', function() {
+    // Navbar scroll effect - combined with active link highlighting for performance
+    function handleScroll() {
+        // Navbar effect
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-    });
+        
+        // Active link highlighting
+        highlightNavLink();
+    }
 
     // Active link highlighting
     const sections = document.querySelectorAll('section[id]');
@@ -70,7 +74,8 @@ function initNavigation() {
         });
     }
 
-    window.addEventListener('scroll', highlightNavLink);
+    // Use throttled scroll handler for better performance
+    window.addEventListener('scroll', throttle(handleScroll, 100));
 }
 
 // ===================================
