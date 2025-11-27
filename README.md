@@ -1,53 +1,75 @@
 # Aman Sharma Portfolio
 
 A modern, responsive portfolio website showcasing my projects, skills, and interests as an ML Engineer.
+Built with React, Tailwind CSS, and Framer Motion for smooth animations.
 
 ## 🚀 Features
 
-- **Home Section** - Hero introduction with animated typing effect and profile card
-- **About Section** - Biography, highlights, and comprehensive tech stack display
-- **Projects Section** - Featured GitHub projects with descriptions and tech tags
-- **Interests Section** - Personal interests and areas of focus
-- **Blogs Section** - Latest blog posts and articles
-- **Contact Section** - Multiple ways to get in touch
-- **Beautiful Footer** - Quick links, social connections, and branding
+- **Modern Design** - Clean monochromatic theme with professional aesthetics
+- **Smooth Animations** - Framer Motion powered scroll and interaction animations
+- **Responsive Layout** - Fully responsive design for all devices
+- **Fast Performance** - Built with Vite for lightning-fast development and builds
+- **Type Safe** - Written in TypeScript for better developer experience
 
 ## 🛠️ Tech Stack
 
-- HTML5
-- CSS3 (Custom properties, Grid, Flexbox, Animations)
-- Vanilla JavaScript (ES6+)
-- Font Awesome Icons
-- Google Fonts (Inter, Fira Code)
+- React 19 with TypeScript
+- Vite
+- Tailwind CSS
+- Framer Motion (animations)
+- Lucide React (icons)
 
 ## 📁 Project Structure
 
 ```
 Portfolio/
-├── index.html          # Main HTML file
-├── css/
-│   └── styles.css      # Stylesheet with responsive design
-├── js/
-│   └── main.js         # JavaScript for interactivity
-└── README.md           # Project documentation
+├── src/
+│   ├── components/
+│   │   ├── Navbar.tsx
+│   │   ├── Hero.tsx
+│   │   ├── About.tsx
+│   │   ├── Projects.tsx
+│   │   ├── Contact.tsx
+│   │   └── Footer.tsx
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── index.html
+├── package.json
+├── vite.config.ts
+├── tsconfig.json
+└── README.md
 ```
 
 ## 🎨 Design Features
 
-- Dark theme with gradient accents
+- Elegant monochromatic dark theme
 - Smooth scroll animations
-- Responsive design for all devices
-- Interactive hover effects
-- Typing animation for roles
-- Counter animation for statistics
-- Mobile-friendly navigation
+- Hover effects and micro-interactions
+- Typing animation for role display
+- Responsive navigation with mobile menu
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
 
 ## 📧 Contact
 
 - **Email**: Sharmaaman42@proton.me
 - **LinkedIn**: [sharmaaman012](https://linkedin.com/in/sharmaaman012)
 - **GitHub**: [89Aman](https://github.com/89Aman)
-- **Kaggle**: [amanshar07](https://kaggle.com/amanshar07)
 
 ## 📄 License
 
