@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 
@@ -19,25 +19,39 @@ const getWindowDimensions = () => {
   return { width: window.innerWidth, height: window.innerHeight };
 };
 
+// Generate random values once and cache them
+interface ParticleConfig {
+  initialX: number;
+  initialY: number;
+  animateX: number;
+  duration: number;
+}
+
+const generateParticleConfig = (width: number, height: number): ParticleConfig => ({
+  initialX: Math.random() * width,
+  initialY: Math.random() * height,
+  animateX: Math.random() * 50 - 25,
+  duration: 4 + Math.random() * 2,
+});
+
 // Floating particles for background
-const FloatingParticle = ({ delay }: { delay: number }) => {
-  const dims = getWindowDimensions();
+const FloatingParticle = ({ delay, config }: { delay: number; config: ParticleConfig }) => {
   return (
     <motion.div
       className="absolute w-1 h-1 bg-white/20 rounded-full"
       initial={{ 
-        x: Math.random() * dims.width, 
-        y: Math.random() * dims.height,
+        x: config.initialX, 
+        y: config.initialY,
         scale: 0 
       }}
       animate={{
         y: [null, -100],
-        x: [null, Math.random() * 50 - 25],
+        x: [null, config.animateX],
         scale: [0, 1, 0],
         opacity: [0, 0.6, 0],
       }}
       transition={{
-        duration: 4 + Math.random() * 2,
+        duration: config.duration,
         delay: delay,
         repeat: Infinity,
         ease: 'easeInOut',
@@ -58,6 +72,13 @@ export default function Hero() {
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const pendingRoleChange = useRef(false);
+
+  // Generate particle configs once on mount using useMemo
+  const particleConfigs = useMemo(() => {
+    const dims = getWindowDimensions();
+    return [...Array(15)].map(() => generateParticleConfig(dims.width, dims.height));
+  }, []);
 
   // Mouse tracking for parallax effect
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -92,14 +113,26 @@ export default function Hero() {
         }, 50);
         return () => clearTimeout(timeout);
       } else {
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-        setIsTyping(true);
+        // Mark that we need to change the role, but do it outside the effect
+        pendingRoleChange.current = true;
       }
     }
   }, [displayText, isTyping, roleIndex]);
 
+  // Handle role change in a separate effect to avoid synchronous setState
+  useEffect(() => {
+    if (pendingRoleChange.current && !isTyping && displayText.length === 0) {
+      pendingRoleChange.current = false;
+      const timeout = setTimeout(() => {
+        setRoleIndex((prev) => (prev + 1) % roles.length);
+        setIsTyping(true);
+      }, 0);
+      return () => clearTimeout(timeout);
+    }
+  }, [displayText, isTyping]);
+
   return (
-    <section id="home" className="h-screen w-screen flex flex-col justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen w-screen flex flex-col justify-center relative overflow-hidden py-4 sm:py-0">
       {/* Animated Background gradient */}
       <motion.div 
         className="absolute inset-0 bg-gradient-to-b from-[#171717] via-[#1f1f1f] to-[#171717]"
@@ -115,8 +148,8 @@ export default function Hero() {
       
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <FloatingParticle key={i} delay={i * 0.3} />
+        {particleConfigs.map((config, i) => (
+          <FloatingParticle key={i} delay={i * 0.3} config={config} />
         ))}
       </div>
       
@@ -156,8 +189,8 @@ export default function Hero() {
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

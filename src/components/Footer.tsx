@@ -16,32 +16,6 @@ const socialLinks = [
   { icon: Mail, href: 'mailto:Sharmaaman42@proton.me', label: 'Email' },
 ];
 
-// Text animation variants for "Made with" text
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const letterVariants: Variants = {
-  hidden: { opacity: 0, y: 20, rotateX: 90 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 12,
-    },
-  },
-};
-
 const heartVariants: Variants = {
   initial: { scale: 1 },
   animate: {
@@ -210,24 +184,13 @@ export default function Footer() {
           
           {/* Animated "Made with ❤️ and lots of ☕" */}
           <motion.div 
-            className="text-sm text-[#525252] flex items-center gap-2 perspective-1000"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            className="text-sm text-[#525252] flex items-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
-            {/* "Made with" text with letter animation */}
-            <span className="flex">
-              {madeWithText.split('').map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={letterVariants}
-                  className="inline-block"
-                  style={{ whiteSpace: letter === ' ' ? 'pre' : 'normal' }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </span>
+            {/* "Made with" text - simple text without letter animation */}
+            <span>{madeWithText}</span>
             
             {/* Animated Heart */}
             <motion.span
@@ -239,19 +202,8 @@ export default function Footer() {
               <Heart size={14} fill="currentColor" />
             </motion.span>
             
-            {/* "and lots of" text with letter animation */}
-            <span className="flex">
-              {coffeeText.split('').map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={letterVariants}
-                  className="inline-block"
-                  style={{ whiteSpace: letter === ' ' ? 'pre' : 'normal' }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </span>
+            {/* "and lots of" text - simple text without letter animation */}
+            <span>{coffeeText}</span>
             
             {/* Animated Coffee with Steam */}
             <motion.span
