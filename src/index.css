@@ -49,6 +49,18 @@ body {
   overflow-x: hidden;
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Full screen sections */
+section {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Custom scrollbar for dark theme */
@@ -73,4 +85,26 @@ body {
 ::selection {
   background: var(--color-accent);
   color: var(--color-white);
+}
+
+/* 3D perspective utility */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Smooth hover transitions for interactive elements */
+a, button {
+  transition: transform 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Ensure images don't cause layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
 }
