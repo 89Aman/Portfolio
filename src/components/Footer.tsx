@@ -81,6 +81,21 @@ const steamVariants: Variants = {
   },
 };
 
+const steamVariants2: Variants = {
+  initial: { opacity: 0, y: 0 },
+  animate: {
+    opacity: [0, 0.7, 0],
+    y: [0, -15, -30],
+    x: [0, 3, -3, 0],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      repeatDelay: 0.5,
+      delay: 0.3,
+    },
+  },
+};
+
 export default function Footer() {
   const footerRef = useRef(null);
   const isInView = useInView(footerRef, { once: true, margin: '-50px' });
@@ -255,10 +270,9 @@ export default function Footer() {
                 ~
               </motion.span>
               <motion.span
-                variants={steamVariants}
+                variants={steamVariants2}
                 initial="initial"
                 animate="animate"
-                style={{ animationDelay: '0.3s' }}
                 className="absolute -top-1 left-1/4 transform -translate-x-1/2 text-[8px] text-[#a3a3a3]"
               >
                 ~

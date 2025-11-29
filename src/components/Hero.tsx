@@ -2,6 +2,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 
+const PORTFOLIO_OWNER = 'Aman Sharma';
+
 const roles = [
   'ML Engineer',
   'Python Developer',
@@ -9,29 +11,40 @@ const roles = [
   'Open Source Contributor',
 ];
 
+// Safe window dimensions for SSR
+const getWindowDimensions = () => {
+  if (typeof window === 'undefined') {
+    return { width: 1200, height: 800 };
+  }
+  return { width: window.innerWidth, height: window.innerHeight };
+};
+
 // Floating particles for background
-const FloatingParticle = ({ delay }: { delay: number }) => (
-  <motion.div
-    className="absolute w-1 h-1 bg-white/20 rounded-full"
-    initial={{ 
-      x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000), 
-      y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-      scale: 0 
-    }}
-    animate={{
-      y: [null, -100],
-      x: [null, Math.random() * 50 - 25],
-      scale: [0, 1, 0],
-      opacity: [0, 0.6, 0],
-    }}
-    transition={{
-      duration: 4 + Math.random() * 2,
-      delay: delay,
-      repeat: Infinity,
-      ease: 'easeInOut',
-    }}
-  />
-);
+const FloatingParticle = ({ delay }: { delay: number }) => {
+  const dims = getWindowDimensions();
+  return (
+    <motion.div
+      className="absolute w-1 h-1 bg-white/20 rounded-full"
+      initial={{ 
+        x: Math.random() * dims.width, 
+        y: Math.random() * dims.height,
+        scale: 0 
+      }}
+      animate={{
+        y: [null, -100],
+        x: [null, Math.random() * 50 - 25],
+        scale: [0, 1, 0],
+        opacity: [0, 0.6, 0],
+      }}
+      transition={{
+        duration: 4 + Math.random() * 2,
+        delay: delay,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+    />
+  );
+};
 
 // Interactive hover effect for social links
 const socialLinks = [
@@ -181,7 +194,7 @@ export default function Hero() {
               transition={{ delay: 0.3 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
             >
-              {'Aman Sharma'.split('').map((letter, index) => (
+              {PORTFOLIO_OWNER.split('').map((letter, index) => (
                 <motion.span
                   key={index}
                   initial={{ opacity: 0, y: 50 }}
@@ -328,7 +341,7 @@ export default function Hero() {
                   >
                     <motion.img
                       src="https://avatars.githubusercontent.com/u/94701256?v=4"
-                      alt="Aman Sharma"
+                      alt={PORTFOLIO_OWNER}
                       className="w-48 h-48 rounded-2xl object-cover mx-auto border-2 border-[#333333]"
                       initial={{ filter: 'grayscale(100%)' }}
                       animate={{ filter: 'grayscale(0%)' }}
