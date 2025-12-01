@@ -9,6 +9,8 @@ const roles = [
   'Python Developer',
   'Backend Developer',
   'Open Source Contributor',
+  'Software Developer',
+  'Software Engineer'
 ];
 
 // Safe window dimensions for SSR
