@@ -86,7 +86,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              AS
+             <image src = "/../../public/webiste2.png"
             </motion.span>
             <motion.span
               className="absolute -top-1 -right-2"
