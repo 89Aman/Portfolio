@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Download, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 
 const PORTFOLIO_OWNER = 'Aman Sharma';
-const RESUME_URL = 'https://drive.google.com/file/d/1eyN8M3jHnv2NNYIkVvOlE3gcCNkE1sqa/view?usp=sharing';
+const RESUME_URL = 'https://drive.usercontent.google.com/u/0/uc?id=1eyN8M3jHnv2NNYIkVvOlE3gcCNkE1sqa&export=download';
 
 const roles = [
   'ML Engineer',
