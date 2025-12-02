@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
+import { ArrowDown, Download, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 
 const PORTFOLIO_OWNER = 'Aman Sharma';
+const RESUME_URL = 'https://drive.google.com/file/d/1eyN8M3jHnv2NNYIkVvOlE3gcCNkE1sqa/view?usp=sharing';
 
 const roles = [
   'ML Engineer',
@@ -303,6 +304,17 @@ export default function Hero() {
                 whileTap={{ scale: 0.95 }}
               >
                 Get In Touch
+              </motion.a>
+              <motion.a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3 border border-[#404040] text-white rounded-full font-semibold hover:bg-[#262626] transition-all duration-300 flex items-center gap-2"
+                whileHover={{ scale: 1.05, borderColor: '#525252' }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Download size={18} />
+                Resume
               </motion.a>
             </motion.div>
 
