@@ -5,6 +5,13 @@ interface WaveTransitionProps {
   onComplete: () => void;
 }
 
+// Constants for particle movement
+const MAX_X_RANGE = 100;
+const X_OFFSET = 50;
+
+// Safe window height accessor
+const getWindowHeight = () => (typeof window !== 'undefined' ? window.innerHeight : 800);
+
 export default function WaveTransition({ onComplete }: WaveTransitionProps) {
   // Generate random bubble configurations - use useState initializer to avoid re-renders
   const [bubbles] = useState(() => 
@@ -15,12 +22,12 @@ export default function WaveTransition({ onComplete }: WaveTransitionProps) {
       const random4 = Math.random();
       return {
         id: i,
-        x: random1 * 100, // percentage
+        x: random1 * MAX_X_RANGE, // percentage
         delay: random2 * 1,
         duration: 2 + random3 * 2,
         size: 10 + random4 * 40, // px
-        xMove1: random1 * 100 - 50,
-        xMove2: random2 * 100 - 50,
+        xMove1: random1 * MAX_X_RANGE - X_OFFSET,
+        xMove2: random2 * MAX_X_RANGE - X_OFFSET,
       };
     })
   );
@@ -33,12 +40,14 @@ export default function WaveTransition({ onComplete }: WaveTransitionProps) {
       const random3 = Math.random();
       return {
         id: i,
-        left: random1 * 100,
+        left: random1 * MAX_X_RANGE,
         duration: 1.5 + random2 * 1.5,
         delay: random3 * 1.2,
       };
     })
   );
+
+  const windowHeight = getWindowHeight();
 
   return (
     <div className="fixed inset-0 z-50 pointer-events-none">
@@ -138,7 +147,7 @@ export default function WaveTransition({ onComplete }: WaveTransitionProps) {
               scale: 0,
             }}
             animate={{ 
-              y: -(window.innerHeight + bubble.size + 100),
+              y: -(windowHeight + bubble.size + 100),
               opacity: [0, 0.8, 0.8, 0],
               scale: [0, 1, 1, 0.8],
               x: [0, bubble.xMove1, bubble.xMove2],
@@ -167,7 +176,7 @@ export default function WaveTransition({ onComplete }: WaveTransitionProps) {
               opacity: 0,
             }}
             animate={{ 
-              y: -(window.innerHeight + 50),
+              y: -(windowHeight + 50),
               opacity: [0, 1, 0],
               scale: [0, 1.5, 0],
             }}
