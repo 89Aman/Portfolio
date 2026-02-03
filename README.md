@@ -1,76 +1,59 @@
-# Aman Sharma Portfolio
+# PortfolioAngular
 
-A modern, responsive portfolio website showcasing my projects, skills, and interests as an ML Engineer.
-Built with React, Tailwind CSS, and Framer Motion for smooth animations.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
 
-## 🚀 Features
+## Development server
 
-- **Modern Design** - Clean monochromatic theme with professional aesthetics
-- **Smooth Animations** - Framer Motion powered scroll and interaction animations
-- **Responsive Layout** - Fully responsive design for all devices
-- **Fast Performance** - Built with Vite for lightning-fast development and builds
-- **Type Safe** - Written in TypeScript for better developer experience
-
-## 🛠️ Tech Stack
-
-- React 19 with TypeScript
-- Vite
-- Tailwind CSS
-- Framer Motion (animations)
-- Lucide React (icons)
-
-## 📁 Project Structure
-
-```
-Portfolio/
-├── src/
-│   ├── components/
-│   │   ├── Navbar.tsx
-│   │   ├── Hero.tsx
-│   │   ├── About.tsx
-│   │   ├── Projects.tsx
-│   │   ├── Contact.tsx
-│   │   └── Footer.tsx
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
-├── index.html
-├── package.json
-├── vite.config.ts
-├── tsconfig.json
-└── README.md
-```
-
-## 🎨 Design Features
-
-- Elegant monochromatic dark theme
-- Smooth scroll animations
-- Hover effects and micro-interactions
-- Typing animation for role display
-- Responsive navigation with mobile menu
-
-## 🚀 Getting Started
+To start a local development server, run:
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+ng serve
 ```
 
-## 📧 Contact
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-- **Email**: Sharmaaman42@proton.me
-- **LinkedIn**: [sharmaaman012](https://linkedin.com/in/sharmaaman012)
-- **GitHub**: [89Aman](https://github.com/89Aman)
+## Code scaffolding
 
-## 📄 License
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-© 2024 Aman Sharma. All rights reserved.
+```bash
+ng generate component component-name
+```
+
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+
+```bash
+ng generate --help
+```
+
+## Building
+
+To build the project run:
+
+```bash
+ng build
+```
+
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running unit tests
+
+To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

@@ -1,0 +1,87 @@
+<section id="projects" class="py-24 bg-[#171717] min-h-screen flex items-center">
+    <div class="w-full max-w-7xl mx-auto px-6 lg:px-12">
+        <!-- Section Header -->
+        <div class="text-center mb-16 section-reveal">
+            <span
+                class="inline-block px-4 py-2 bg-[#262626] text-[#a3a3a3] text-sm rounded-full mb-4 hover:scale-105 hover:bg-[#333333] transition-all cursor-default">
+                <span class="inline-flex items-center gap-2">
+                    <lucide-icon [name]="Code2" [size]="14"></lucide-icon>
+                    What I've built
+                </span>
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold text-white">Featured Projects</h2>
+        </div>
+
+        <!-- Project Grid -->
+        <div class="project-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @for (project of projects; track project.title) {
+            <!-- Make the entire card a clickable link -->
+            <a [href]="project.github" target="_blank" rel="noopener noreferrer"
+                class="project-card group block relative bg-[#1f1f1f] border border-[#333333] rounded-2xl overflow-hidden cursor-pointer"
+                (mouseenter)="hoveredIndex = $index" (mouseleave)="hoveredIndex = null">
+
+                <!-- Project Header -->
+                <div
+                    class="h-32 bg-gradient-to-br from-[#262626] to-[#1a1a1a] flex items-center justify-center relative overflow-hidden group-hover:from-[#333333] group-hover:to-[#252525] transition-all duration-500">
+
+                    <!-- Featured Badge -->
+                    @if (project.featured) {
+                    <div
+                        class="featured-badge absolute top-3 right-3 px-2 py-1 bg-indigo-500/20 border border-indigo-500/50 rounded-full text-xs text-indigo-300 font-medium">
+                        Featured
+                    </div>
+                    }
+
+                    <!-- Pattern Overlay -->
+                    <div class="absolute inset-0 opacity-10 pointer-events-none"
+                        style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;">
+                    </div>
+
+                    <!-- GitHub Icon on Hover -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-[#171717] via-[#171717]/60 to-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div
+                            class="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#171717] shadow-xl transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                            <lucide-icon [name]="Github" [size]="24"></lucide-icon>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6">
+                    <h3
+                        class="text-lg font-bold text-white mb-3 group-hover:text-indigo-300 transition-colors duration-300 flex items-center gap-2">
+                        {{ project.title }}
+                        <lucide-icon [name]="ExternalLink" [size]="14"
+                            class="opacity-0 group-hover:opacity-100 transition-opacity"></lucide-icon>
+                    </h3>
+                    <p class="text-sm text-[#a3a3a3] mb-4 leading-relaxed line-clamp-2">
+                        {{ project.description }}
+                    </p>
+
+                    <!-- Tech Tags -->
+                    <div class="flex flex-wrap gap-2">
+                        @for (tech of project.tech; track tech) {
+                        <span class="tech-tag px-3 py-1 bg-[#262626] text-[#a3a3a3] text-xs rounded-full font-mono">
+                            {{ tech }}
+                        </span>
+                        }
+                    </div>
+                </div>
+            </a>
+            }
+        </div>
+
+        <!-- View All CTA -->
+        <div class="text-center mt-12 section-reveal" style="animation-delay: 0.5s;">
+            <a href="https://github.com/89Aman?tab=repositories" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-3 px-8 py-4 border border-[#404040] text-white rounded-full font-semibold transition-all duration-300 hover:scale-105 hover:border-indigo-500/50 hover:bg-indigo-500/10 group">
+                <lucide-icon [name]="Github" [size]="20"
+                    class="group-hover:rotate-12 transition-transform duration-300"></lucide-icon>
+                View All Projects on GitHub
+                <lucide-icon [name]="ExternalLink" [size]="16"
+                    class="group-hover:translate-x-1 transition-transform duration-300"></lucide-icon>
+            </a>
+        </div>
+    </div>
+</section>
