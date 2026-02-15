@@ -35,7 +35,7 @@ interface ParticleConfig {
 })
 export class HeroComponent implements OnInit, OnDestroy {
   readonly PORTFOLIO_OWNER = 'Aman Sharma';
-  readonly RESUME_URL = 'https://drive.usercontent.google.com/uc?id=1JvenyodUaX2q-5WV-kXW1Xuu3jXt0ScN&export=download';
+  readonly RESUME_URL = 'https://drive.usercontent.google.com/u/0/uc?id=13iSWjWB922ps7UeKbW4vCeQDFJFSgm4B&export=download';
 
   readonly roles = [
     'Backend Engineer',
