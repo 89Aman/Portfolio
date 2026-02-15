@@ -35,11 +35,11 @@ export class AboutComponent {
 
   skills = [
     { category: 'Languages', items: ['Python', 'Java', 'C++', 'C'] },
-    { category: 'ML/AI', items: ['TensorFlow', 'PyTorch', 'Scikit-learn', 'OpenCV', 'Pandas', 'NumPy'] },
-    { category: 'Web Frameworks', items: ['Django', 'Flask', 'FastAPI', 'Streamlit'] },
-    { category: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'SQLite'] },
+    { category: 'ML/AI', items: ['Scikit-learn', 'Pandas', 'NumPy'] },
+    { category: 'Web Frameworks', items: ['Django', 'Flask', 'FastAPI'] },
+    { category: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'] },
     { category: 'Cloud & DevOps', items: ['AWS', 'Azure', 'GCP', 'Docker', 'Terraform'] },
-    { category: 'Tools', items: ['Git', 'GitHub Actions', 'Postman', 'Nginx'] },
+    { category: 'Tools', items: ['Git', 'Postman', 'Nginx'] },
   ];
 
   highlights = [

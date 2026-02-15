@@ -69,13 +69,6 @@ export class ProjectsComponent {
       github: 'https://github.com/89Aman/Material-Demand-Forecasting',
       featured: false,
     },
-    {
-      title: 'Movie Recommendation System',
-      description: 'A fullstack Flutter app with TensorFlow-powered movie recommendations based on user preferences.',
-      tech: ['Flutter', 'TensorFlow', 'Python'],
-      github: 'https://github.com/89Aman/Fullstack-movie-recommendation-system',
-      featured: false,
-    },
   ];
 
   hoveredIndex: number | null = null;
