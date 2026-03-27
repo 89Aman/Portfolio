@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Github, Linkedin, Mail, ExternalLink, Send, MessageCircle } from 'lucide-angular';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
@@ -9,6 +9,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('reveal', [
       transition(':enter', [

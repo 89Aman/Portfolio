@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, signal, computed } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, ArrowDown, Download, Github, Linkedin, Mail, Sparkles } from 'lucide-angular';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
@@ -20,6 +20,7 @@ interface ParticleConfig {
   ],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('staggerFadeIn', [
       transition(':enter', [
@@ -60,12 +61,19 @@ export class HeroComponent implements OnInit, OnDestroy {
   displayText = '';
   private roleIndex = 0;
   private isTyping = true;
-  private typingTimer: any;
+  private typingTimer: ReturnType<typeof setTimeout> | null = null;
 
   mousePosition = { x: 0, y: 0 };
   particleConfigs: ParticleConfig[] = [];
 
-  constructor() {
+  // Pre-generate reduced particle count (8 instead of 15) for better performance
+  private readonly PARTICLE_COUNT = 8;
+
+  // Throttle mousemove to 60fps using requestAnimationFrame
+  private rafId: number | null = null;
+  private pendingMouseEvent: MouseEvent | null = null;
+
+  constructor(private ngZone: NgZone) {
     this.generateParticles();
   }
 
@@ -74,15 +82,36 @@ export class HeroComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearTimeout(this.typingTimer);
+    if (this.typingTimer) {
+      clearTimeout(this.typingTimer);
+    }
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+    }
   }
 
   @HostListener('window:mousemove', ['$event'])
   onMouseMove(e: MouseEvent) {
-    this.mousePosition = {
-      x: (e.clientX / window.innerWidth - 0.5) * 20,
-      y: (e.clientY / window.innerHeight - 0.5) * 20,
-    };
+    // Throttle: only process if no RAF pending
+    if (this.rafId) {
+      this.pendingMouseEvent = e;
+      return;
+    }
+
+    this.pendingMouseEvent = e;
+    this.rafId = requestAnimationFrame(() => {
+      if (this.pendingMouseEvent) {
+        // Run outside Angular zone to avoid change detection
+        this.ngZone.runOutsideAngular(() => {
+          this.mousePosition = {
+            x: (this.pendingMouseEvent!.clientX / window.innerWidth - 0.5) * 20,
+            y: (this.pendingMouseEvent!.clientY / window.innerHeight - 0.5) * 20,
+          };
+        });
+      }
+      this.rafId = null;
+      this.pendingMouseEvent = null;
+    });
   }
 
   private startTypingAnimation() {
@@ -112,7 +141,8 @@ export class HeroComponent implements OnInit, OnDestroy {
     const width = typeof window !== 'undefined' ? window.innerWidth : 1200;
     const height = typeof window !== 'undefined' ? window.innerHeight : 800;
 
-    this.particleConfigs = Array(15).fill(0).map((_, i) => ({
+    // Reduced particle count for better performance on mobile/low-end devices
+    this.particleConfigs = Array(this.PARTICLE_COUNT).fill(0).map((_, i) => ({
       initialX: Math.random() * width,
       initialY: Math.random() * height,
       animateX: Math.random() * 50 - 25,

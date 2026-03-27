@@ -2,8 +2,8 @@
     <!-- Animated Background -->
     <div class="absolute inset-0 bg-gradient-to-b from-[#171717] via-[#1f1f1f] to-[#171717] gradient-animate"></div>
 
-    <!-- Floating particles -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Floating particles - hidden on mobile and when reduced motion is preferred -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none hidden md:block motion-reduce:hidden">
         @for (p of particleConfigs; track $index) {
         <div class="particle absolute w-1 h-1 bg-white/20 rounded-full" [style.left.px]="p.initialX"
             [style.top.px]="p.initialY" [style.--duration]="p.duration + 's'" [style.--delay]="p.delay + 's'"
@@ -12,10 +12,11 @@
         }
     </div>
 
-    <!-- Grid Pattern -->
-    <div class="absolute inset-0 opacity-[0.03] pointer-events-none transition-transform duration-300 ease-out"
-        style="background-image: radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0); background-size: 40px 40px;"
-        [style.transform]="'translate(' + mousePosition.x * 0.5 + 'px, ' + mousePosition.y * 0.5 + 'px)'">
+    <!-- Grid Pattern - optimized with CSS custom properties -->
+    <div class="absolute inset-0 opacity-[0.03] pointer-events-none transition-transform duration-300 ease-out grid-pattern"
+        style="background-image: radial-gradient(circle at 1px 1px, #ffffff 1px, transparent 0); background-size: 40px 40px; transform: translate(var(--mouse-x, 0px), var(--mouse-y, 0px));"
+        [style.--mouse-x.px]="mousePosition.x * 0.5"
+        [style.--mouse-y.px]="mousePosition.y * 0.5">
     </div>
 
     <!-- Content -->
@@ -78,9 +79,11 @@
                 </div>
             </div>
 
-            <!-- Profile Card -->
-            <div class="order-1 lg:order-2 flex justify-center fade-in-up delay-200"
-                [style.transform]="'translate(' + mousePosition.x * 0.3 + 'px, ' + mousePosition.y * 0.3 + 'px)'">
+            <!-- Profile Card - optimized with CSS custom properties -->
+            <div class="order-1 lg:order-2 flex justify-center fade-in-up delay-200 profile-card-container"
+                style="transform: translate(var(--card-x, 0px), var(--card-y, 0px));"
+                [style.--card-x.px]="mousePosition.x * 0.3"
+                [style.--card-y.px]="mousePosition.y * 0.3">
                 <div class="relative group">
                     <!-- Glow Effect -->
                     <div
@@ -92,8 +95,9 @@
                         class="card-glow relative bg-[#1f1f1f] border border-[#333333] rounded-3xl p-8 shadow-2xl backdrop-blur-sm group-hover:border-[#525252] transition-all duration-500">
                         <!-- Profile Image -->
                         <div class="relative mb-6">
-                            <img src="https://avatars.githubusercontent.com/u/94701256?v=4" alt="Profile"
-                                class="w-48 h-48 rounded-2xl object-cover mx-auto border-2 border-[#333333] grayscale hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            <img src="https://avatars.githubusercontent.com/u/94701256?v=4" alt="Aman Sharma - Profile"
+                                class="w-48 h-48 rounded-2xl object-cover mx-auto border-2 border-[#333333] grayscale hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                                width="192" height="192" loading="eager" decoding="async" fetchpriority="high">
 
                             <!-- Status Badge -->
                             <div

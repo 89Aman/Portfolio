@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Github, ExternalLink, Film, Brain, BookOpen, Plug, Gamepad2, Code2, Rocket, ShieldCheck, Search, Database, BarChart3, Activity, Calculator, ListTodo, Coffee } from 'lucide-angular';
+import { LucideAngularModule, Github, ExternalLink, Code2 } from 'lucide-angular';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
 @Component({
@@ -9,6 +9,7 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './projects.html',
   styleUrl: './projects.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('reveal', [
       transition(':enter', [

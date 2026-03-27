@@ -170,3 +170,62 @@ button {
   outline: 2px solid #6366f1;
   outline-offset: 2px;
 }
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .section-reveal {
+    opacity: 1;
+    animation: none;
+  }
+
+  .particle {
+    display: none;
+  }
+
+  .scroll-indicator {
+    animation: none;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .section-reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .particle {
+    display: none;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Image optimization - prevent layout shift */
+img {
+  max-width: 100%;
+  height: auto;
+}
