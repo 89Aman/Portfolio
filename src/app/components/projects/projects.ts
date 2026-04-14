@@ -3,6 +3,21 @@ import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Github, ExternalLink, Code2 } from 'lucide-angular';
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 
+type ProjectLink = {
+  label: string;
+  href: string;
+  type: 'github' | 'live';
+};
+
+type Project = {
+  title: string;
+  description: string;
+  tech: string[];
+  categories: string[];
+  links: ProjectLink[];
+  featured: boolean;
+};
+
 @Component({
   selector: 'app-projects',
   standalone: true,
@@ -34,43 +49,101 @@ export class ProjectsComponent {
   readonly ExternalLink = ExternalLink;
   readonly Code2 = Code2;
 
-  projects = [
+  projects: Project[] = [
     {
       title: 'Knowledge Vault',
       description: 'A Personal Semantic Search Engine that uses RAG technology to index and search through personal documents with AI-powered synthesis.',
       tech: ['Python', 'GCP', 'Cloud Run', 'ChromaDB', 'RAG'],
-      github: 'https://github.com/89Aman/Personal-Search-Engine',
+      categories: ['AI/ML', 'Backend', 'Cloud'],
+      links: [
+        {
+          label: 'View on GitHub',
+          href: 'https://github.com/89Aman/Personal-Search-Engine',
+          type: 'github'
+        }
+      ],
       featured: true,
     },
     {
       title: 'CampusFix',
       description: 'A Smart Campus Maintenance & Safety App designed to streamline reporting and resolution of campus issues.',
       tech: ['Flutter', 'FastAPI', 'GCP', 'Supabase'],
-      github: 'https://campus-fix-website-345u.vercel.app',
+      categories: ['Fullstack', 'Mobile'],
+      links: [
+        {
+          label: 'Live Demo',
+          href: 'https://campus-fix-website-345u.vercel.app',
+          type: 'live'
+        }
+      ],
       featured: true,
     },
     {
       title: 'SkillSnap',
       description: 'An AI-powered project for The Forge Hackathon, leveraging Gemini API and FastAPI for intelligent skill assessment.',
       tech: ['Angular', 'FastAPI', 'Gemini API', 'Piston API'],
-      github: 'https://github.com/89Aman/SkillSnap',
+      categories: ['Hackathon', 'AI/ML', 'Fullstack'],
+      links: [
+        {
+          label: 'View on GitHub',
+          href: 'https://github.com/89Aman/SkillSnap',
+          type: 'github'
+        }
+      ],
       featured: true,
     },
     {
       title: 'RAG-DEMO',
       description: 'A demonstration of RAG technology transforming static PDF documents into interactive conversational interfaces.',
       tech: ['Python', 'Gemini-API', 'GenAI', 'RAG'],
-      github: 'https://github.com/89Aman/RAG-DEMO',
+      categories: ['AI/ML', 'Demo'],
+      links: [
+        {
+          label: 'View on GitHub',
+          href: 'https://github.com/89Aman/RAG-DEMO',
+          type: 'github'
+        }
+      ],
       featured: true,
     },
     {
       title: 'Material Demand Forecasting',
       description: 'A predictive modeling project focused on forecasting material demand using historical data and ML algorithms.',
       tech: ['Python', 'TypeScript', 'Machine Learning'],
-      github: 'https://github.com/89Aman/Material-Demand-Forecasting',
+      categories: ['AI/ML', 'Data'],
+      links: [
+        {
+          label: 'View on GitHub',
+          href: 'https://github.com/89Aman/Material-Demand-Forecasting',
+          type: 'github'
+        }
+      ],
       featured: false,
     },
   ];
 
-  hoveredIndex: number | null = null;
+  filters: string[] = ['All'];
+  activeFilter = 'All';
+  featuredCount = this.projects.filter(project => project.featured).length;
+  totalCount = this.projects.length;
+
+  constructor() {
+    const categorySet = new Set<string>();
+    this.projects.forEach(project => {
+      project.categories.forEach(category => categorySet.add(category));
+    });
+    this.filters = ['All', ...Array.from(categorySet)];
+  }
+
+  get filteredProjects(): Project[] {
+    if (this.activeFilter === 'All') {
+      return this.projects;
+    }
+
+    return this.projects.filter(project => project.categories.includes(this.activeFilter));
+  }
+
+  setFilter(filter: string) {
+    this.activeFilter = filter;
+  }
 }
