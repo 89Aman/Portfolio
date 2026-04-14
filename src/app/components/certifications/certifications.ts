@@ -26,27 +26,27 @@ export class CertificationsComponent {
   certifications: Certification[] = [
     {
       title: 'AWS Generative AI — Cloud Technology & Services Concepts',
-      issuer: 'Amazon Web Services (AWS)',
+      issuer: 'Amazon Web Services Training and Certification',
       color: '#FF9900',
-      credentialUrl: '#',
+      credentialUrl: 'https://www.credly.com/badges/3f9e44c3-e440-457d-afdd-a1919c400e2b/public_url',
     },
     {
-      title: 'MongoDB Python Developer Path',
-      issuer: 'MongoDB University',
-      color: '#00ED64',
-      credentialUrl: '#',
+      title: 'Machine learning Foundations',
+      issuer: 'Amazon Web Services Training and Certification',
+      color: '#acf5c9ff',
+      credentialUrl: 'https://www.credly.com/badges/3f9e44c3-e440-457d-afdd-a1919c400e2b',
     },
     {
       title: 'API Fundamentals Student Expert',
       issuer: 'Postman',
       color: '#FF6C37',
-      credentialUrl: '#',
+      credentialUrl: 'https://www.linkedin.com/in/sharmaaman012/overlay/Certifications/1841701237/treasury/?profileId=ACoAAErYaFYBULxleoZBiBlk6sdeuO34h0vq8G0',
     },
     {
-      title: 'Supervised Learning with scikit-learn',
-      issuer: 'DataCamp',
-      color: '#03EF62',
-      credentialUrl: '#',
+      title: 'Gemini Certified : University Student',
+      issuer: 'Google',
+      color: '#036defff',
+      credentialUrl: 'https://www.linkedin.com/in/sharmaaman012/overlay/Certifications/715968225/treasury/?profileId=ACoAAErYaFYBULxleoZBiBlk6sdeuO34h0vq8G0',
     },
   ];
 
