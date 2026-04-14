@@ -62,6 +62,6 @@ export class CertificationsComponent {
   ];
 
   openLinkedIn() {
-    window.open('https://linkedin.com/in/sharmaaman26', '_blank');
+    window.open('https://www.linkedin.com/in/sharmaaman012/details/certifications/', '_blank');
   }
 }

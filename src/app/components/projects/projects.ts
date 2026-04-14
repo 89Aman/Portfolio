@@ -13,20 +13,6 @@ interface Project {
   category: string[];
 }
 
-type ProjectLink = {
-  label: string;
-  href: string;
-  type: 'github' | 'live';
-};
-
-type Project = {
-  title: string;
-  description: string;
-  tech: string[];
-  categories: string[];
-  links: ProjectLink[];
-  featured: boolean;
-};
 
 @Component({
   selector: 'app-projects',
