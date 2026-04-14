@@ -34,6 +34,20 @@ export class ProjectsComponent {
 
   projects: Project[] = [
     {
+      title: 'Parivesh 3.0',
+      description: 'Environmental Clearance workflow engine with multi-role dashboards and AI-generated MoM docs.',
+      fullDescription: [
+        'Decoupled React (Vite + Tailwind) frontend with role-isolated dashboards for Admin, Project Proponent, Scrutiny, and MoM teams',
+        'FastAPI backend with async SQLAlchemy + Supabase PostgreSQL enforcing finite-state machine for the EC lifecycle and RBAC-protected endpoints',
+        'AI auto-gist generation for meeting briefs using Google Generative AI with secured OpenAPI docs and JWT authentication',
+        'Docker + Cloud Build artifacts ready for Cloud Run deployment; demo credentials available in the repository',
+      ],
+      tech: ['React', 'Vite', 'TailwindCSS', 'FastAPI', 'PostgreSQL', 'Supabase', 'SQLAlchemy', 'JWT', 'Google GenAI'],
+      github: 'https://github.com/89Aman/Parivesh-3.0',
+      featured: true,
+      category: ['Full-Stack', 'AI/ML', 'Cloud'],
+    },
+    {
       title: 'Knowledge Vault',
       description: 'Personal semantic search engine with RAG pipeline. Hybrid scoring with 40% relevance improvement.',
       fullDescription: [

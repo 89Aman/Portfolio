@@ -14,11 +14,11 @@
         <button
           (click)="filterProjects(filter)"
           class="px-4 py-2 rounded-md text-sm font-medium transition-colors"
-          [class.bg-[#4F98A3]="activeFilter() === filter"
-          [class.text-[#0D0D12]="activeFilter() === filter"
-          [class.bg-[#1A1A24]="activeFilter() !== filter"
-          [class.text-[#797876]="activeFilter() !== filter"
-          [class.hover.text-[#4F98A3]]="activeFilter() !== filter">
+          [ngClass]="
+            activeFilter() === filter
+              ? 'bg-[#4F98A3] text-[#0D0D12]'
+              : 'bg-[#1A1A24] text-[#797876] hover:text-[#4F98A3]'
+          ">
           {{ filter }}
         </button>
       }
