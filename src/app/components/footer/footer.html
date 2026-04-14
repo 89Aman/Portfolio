@@ -1,78 +1,73 @@
-<footer class="footer-content bg-[#171717] border-t border-[#262626]">
-    <div class="max-w-6xl mx-auto px-6 py-16">
-        <div class="grid md:grid-cols-3 gap-12 mb-12">
-            <!-- Brand -->
-            <div class="space-y-4">
-                <a href="#home" (click)="scrollToTop($event)"
-                    class="inline-block text-3xl font-bold text-white hover:scale-105 active:scale-95 transition-transform relative group">
-                    <span class="relative z-10">AS</span>
-                    <span
-                        class="absolute inset-0 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></span>
-                </a>
-                <p class="text-[#a3a3a3] text-sm leading-relaxed max-w-xs">
-                    Building scalable backend solutions and crafting beautiful digital experiences.
-                </p>
-            </div>
+<footer class="bg-[#0D0D12] border-t border-[#2A2A35]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <!-- Brand -->
+      <div class="md:col-span-2 space-y-3">
+        <a href="#home" (click)="scrollToTop($event)"
+          class="inline-flex items-center gap-2 text-xl font-mono text-[#4F98A3]">
+          <lucide-icon [name]="Terminal" [size]="20"></lucide-icon>
+          <span>aman.dev</span>
+        </a>
+        <p class="text-[#797876] text-sm leading-relaxed max-w-sm">
+          Building intelligent systems, one commit at a time.
+        </p>
+        <p class="text-[#797876] text-sm">
+          Raipur, Chhattisgarh, India
+        </p>
+      </div>
 
-            <!-- Quick Links -->
-            <div>
-                <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-6">
-                    Quick Links
-                </h4>
-                <ul class="space-y-3">
-                    @for (link of quickLinks; track link.name) {
-                    <li>
-                        <a [href]="link.href" (click)="scrollToSection($event, link.href)"
-                            class="quick-link text-[#a3a3a3] hover:text-white transition-all duration-300 inline-block">
-                            {{ link.name }}
-                        </a>
-                    </li>
-                    }
-                </ul>
-            </div>
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-xs font-semibold text-[#CDCCCA] uppercase tracking-wider mb-4">Navigate</h4>
+        <ul class="space-y-2">
+          @for (link of quickLinks; track link.name) {
+            <li>
+              <a [href]="link.href" (click)="scrollToSection($event, link.href)"
+                class="text-[#797876] hover:text-[#4F98A3] transition-colors text-sm">
+                {{ link.name }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
 
-            <!-- Connect -->
-            <div>
-                <h4 class="text-sm font-semibold text-white uppercase tracking-wider mb-6">
-                    Connect
-                </h4>
-                <div class="flex gap-3">
-                    @for (social of socialLinks; track social.label) {
-                    <a [href]="social.href" target="_blank"
-                        class="footer-social w-10 h-10 flex items-center justify-center rounded-lg bg-[#262626] text-[#a3a3a3] hover:bg-[#404040] hover:scale-110 hover:rotate-6 transition-all duration-300"
-                        [attr.aria-label]="social.label">
-                        <lucide-icon [name]="social.icon" [size]="18"></lucide-icon>
-                    </a>
-                    }
-                </div>
-            </div>
+      <!-- Social -->
+      <div>
+        <h4 class="text-xs font-semibold text-[#CDCCCA] uppercase tracking-wider mb-4">Connect</h4>
+        <div class="flex gap-3">
+          @for (social of socialLinks; track social.label) {
+            <a [href]="social.href" target="_blank"
+              class="w-10 h-10 flex items-center justify-center rounded-md bg-[#1A1A24] border border-[#2A2A35] text-[#797876] hover:text-[#4F98A3] hover:border-[#4F98A3] transition-all"
+              [attr.aria-label]="social.label">
+              <lucide-icon [name]="social.icon" [size]="18"></lucide-icon>
+            </a>
+          }
         </div>
-
-        <!-- Bottom -->
-        <div class="pt-8 border-t border-[#262626] flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-sm text-[#525252]">
-                © {{ currentYear }} Aman Sharma. All rights reserved.
-            </p>
-
-            <!-- Made with love -->
-            <div class="text-sm text-[#525252] flex items-center gap-2">
-                <span>Made with</span>
-                <span class="heart-beat inline-flex text-red-500">
-                    <lucide-icon [name]="Heart" [size]="14" class="fill-current"></lucide-icon>
-                </span>
-                <span>and lots of</span>
-                <span class="coffee-steam relative inline-flex items-center group cursor-pointer">
-                    <lucide-icon [name]="Coffee" [size]="16"
-                        class="text-amber-600 group-hover:rotate-12 transition-transform duration-300">
-                    </lucide-icon>
-                </span>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- Back to Top Button -->
-    <a href="#home" (click)="scrollToTop($event)"
-        class="back-to-top fixed bottom-8 right-8 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-500/30 z-40 group">
-        <span class="group-hover:-translate-y-1 transition-transform duration-300 text-xl">↑</span>
-    </a>
+    <!-- Bottom -->
+    <div class="pt-8 border-t border-[#2A2A35] flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-sm text-[#797876]">
+        © {{ currentYear }} Aman Sharma. All rights reserved.
+      </p>
+
+      <p class="text-sm text-[#797876] flex items-center gap-2">
+        <span>Built with</span>
+        <lucide-icon [name]="Heart" [size]="14" class="text-[#4F98A3] fill-current"></lucide-icon>
+        <span>and</span>
+        <span class="text-[#6DBF8F]">coffee</span>
+      </p>
+    </div>
+
+    <p class="text-center text-xs text-[#797876] mt-8 font-mono">
+      © 2026 Aman Sharma · Python + Angular · Raipur, India
+    </p>
+  </div>
+
+  <!-- Back to Top -->
+  <a href="#home" (click)="scrollToTop($event)"
+    class="fixed bottom-8 right-8 w-12 h-12 flex items-center justify-center rounded-full bg-[#4F98A3] text-[#0D0D12] z-40 hover:bg-[#6DBF8F] transition-colors">
+    <lucide-icon [name]="ArrowUp" [size]="20"></lucide-icon>
+  </a>
 </footer>

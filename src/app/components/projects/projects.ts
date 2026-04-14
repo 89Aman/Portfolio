@@ -1,7 +1,17 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Github, ExternalLink, Code2 } from 'lucide-angular';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { LucideAngularModule, Github, ExternalLink, Code2, Cpu, Cloud, Laptop } from 'lucide-angular';
+
+interface Project {
+  title: string;
+  description: string;
+  fullDescription: string[];
+  tech: string[];
+  github?: string;
+  live?: string;
+  featured: boolean;
+  category: string[];
+}
 
 type ProjectLink = {
   label: string;
@@ -24,126 +34,169 @@ type Project = {
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './projects.html',
   styleUrl: './projects.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('reveal', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(50px)' }),
-        animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ]),
-    trigger('staggerCards', [
-      transition(':enter', [
-        query('.project-card', [
-          style({ opacity: 0, transform: 'translateY(50px) rotateX(-15deg)' }),
-          stagger(100, [
-            animate('500ms cubic-bezier(0.34, 1.56, 0.64, 1)', style({ opacity: 1, transform: 'translateY(0) rotateX(0)' }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ]
 })
 export class ProjectsComponent {
   readonly Github = Github;
   readonly ExternalLink = ExternalLink;
   readonly Code2 = Code2;
+  readonly Cpu = Cpu;
+  readonly Cloud = Cloud;
+  readonly Laptop = Laptop;
+
+  activeFilter = signal('All');
+
+  filters = ['All', 'AI/ML', 'Full-Stack', 'Cloud', 'Hackathon'];
 
   projects: Project[] = [
     {
-      title: 'Knowledge Vault',
-      description: 'A Personal Semantic Search Engine that uses RAG technology to index and search through personal documents with AI-powered synthesis.',
-      tech: ['Python', 'GCP', 'Cloud Run', 'ChromaDB', 'RAG'],
-      categories: ['AI/ML', 'Backend', 'Cloud'],
-      links: [
-        {
-          label: 'View on GitHub',
-          href: 'https://github.com/89Aman/Personal-Search-Engine',
-          type: 'github'
-        }
+      title: 'Parivesh 3.0',
+      description: 'Environmental Clearance workflow engine with multi-role dashboards and AI-generated MoM docs.',
+      fullDescription: [
+        'Decoupled React (Vite + Tailwind) frontend with role-isolated dashboards for Admin, Project Proponent, Scrutiny, and MoM teams',
+        'FastAPI backend with async SQLAlchemy + Supabase PostgreSQL enforcing finite-state machine for the EC lifecycle and RBAC-protected endpoints',
+        'AI auto-gist generation for meeting briefs using Google Generative AI with secured OpenAPI docs and JWT authentication',
+        'Docker + Cloud Build artifacts ready for Cloud Run deployment; demo credentials available in the repository',
       ],
+      tech: ['React', 'Vite', 'TailwindCSS', 'FastAPI', 'PostgreSQL', 'Supabase', 'SQLAlchemy', 'JWT', 'Google GenAI'],
+      github: 'https://github.com/89Aman/Parivesh-3.0',
       featured: true,
+      category: ['Full-Stack', 'AI/ML', 'Cloud'],
+    },
+    {
+      title: 'Knowledge Vault',
+      description: 'Personal semantic search engine with RAG pipeline. Hybrid scoring with 40% relevance improvement.',
+      fullDescription: [
+        'Engineered production-grade semantic search system with RAG pipeline',
+        'Hybrid scoring: vector similarity + keyword density + temporal recency → 40% relevance improvement',
+        'JWT auth + OAuth 2.0 using Authlib',
+        'Deployed on GCP Cloud Run with Docker; <200ms query response times',
+      ],
+      tech: ['FastAPI', 'React', 'ChromaDB', 'Google Gemini', 'sentence-transformers', 'GCP', 'Docker', 'JWT'],
+      github: 'https://github.com/89Aman/Knowledge-vault',
+      featured: true,
+      category: ['AI/ML', 'Cloud', 'Full-Stack'],
     },
     {
       title: 'CampusFix',
-      description: 'A Smart Campus Maintenance & Safety App designed to streamline reporting and resolution of campus issues.',
-      tech: ['Flutter', 'FastAPI', 'GCP', 'Supabase'],
-      categories: ['Fullstack', 'Mobile'],
-      links: [
-        {
-          label: 'Live Demo',
-          href: 'https://campus-fix-website-345u.vercel.app',
-          type: 'live'
-        }
+      description: 'Smart campus facility management platform. Built for GDG Solution Challenge with 500+ concurrent requests.',
+      fullDescription: [
+        'FastAPI backend handling 500+ concurrent requests with real-time status workflows',
+        'Flutter mobile app (Android/iOS): camera capture, GPS location tagging',
+        'Angular 17 admin dashboard with role-based access control',
+        'Supabase PostgreSQL + OAuth 2.0 + JWT, deployed on GCP Cloud Run',
       ],
+      tech: ['FastAPI', 'Flutter', 'Angular 17', 'PostgreSQL', 'Supabase', 'GCP', 'Docker', 'JWT'],
+      github: 'https://github.com/89Aman/CampusFix',
       featured: true,
-    },
-    {
-      title: 'SkillSnap',
-      description: 'An AI-powered project for The Forge Hackathon, leveraging Gemini API and FastAPI for intelligent skill assessment.',
-      tech: ['Angular', 'FastAPI', 'Gemini API', 'Piston API'],
-      categories: ['Hackathon', 'AI/ML', 'Fullstack'],
-      links: [
-        {
-          label: 'View on GitHub',
-          href: 'https://github.com/89Aman/SkillSnap',
-          type: 'github'
-        }
-      ],
-      featured: true,
+      category: ['Full-Stack', 'Cloud', 'Hackathon'],
     },
     {
       title: 'RAG-DEMO',
-      description: 'A demonstration of RAG technology transforming static PDF documents into interactive conversational interfaces.',
-      tech: ['Python', 'Gemini-API', 'GenAI', 'RAG'],
-      categories: ['AI/ML', 'Demo'],
-      links: [
-        {
-          label: 'View on GitHub',
-          href: 'https://github.com/89Aman/RAG-DEMO',
-          type: 'github'
-        }
+      description: 'FDA drug assistant using Google RAG architecture. Transforms static PDFs into conversational interfaces.',
+      fullDescription: [
+        'Automated PDF indexing pipeline for multiple drug labels via Google File Search API',
+        'Semantic chunking enables cross-document drug interaction queries',
+        'Source attribution system with grounding metadata and citations',
+        'Sub-second retrieval latency; transparent, verifiable AI responses',
       ],
+      tech: ['Python', 'Google GenAI SDK', 'Gemini 2.5 Flash', 'File Search API', 'RAG'],
+      github: 'https://github.com/89Aman/RAG-DEMO',
       featured: true,
+      category: ['AI/ML'],
+    },
+    {
+      title: 'SkillSnap',
+      description: 'AI skill assessment platform with live code execution. Built in 24hrs for The Forge Hackathon.',
+      fullDescription: [
+        'Angular frontend + FastAPI backend architecture',
+        'Gemini API for intelligent skill gap analysis',
+        'Piston API for sandboxed code execution in multiple languages',
+        'Gemini Cloud SQL for persistent user data',
+      ],
+      tech: ['Angular', 'FastAPI', 'Gemini API', 'Piston API', 'HTML'],
+      github: 'https://github.com/89Aman/SkillSnap',
+      featured: true,
+      category: ['AI/ML', 'Hackathon', 'Full-Stack'],
+    },
+    {
+      title: 'Movie Recommendation',
+      description: 'Flutter frontend with TensorFlow-powered collaborative filtering model for movie recommendations.',
+      fullDescription: [
+        'TensorFlow/Keras collaborative filtering recommendation model',
+        'Flutter frontend consuming the model via API',
+        'Full pipeline: data preprocessing → model training → API serving → mobile UI',
+      ],
+      tech: ['Flutter', 'TensorFlow', 'Python', 'Jupyter Notebook', 'Dart'],
+      github: 'https://github.com/89Aman/Fullstack-movie-recommendation-system',
+      featured: false,
+      category: ['AI/ML', 'Full-Stack', 'Mobile'],
     },
     {
       title: 'Material Demand Forecasting',
-      description: 'A predictive modeling project focused on forecasting material demand using historical data and ML algorithms.',
-      tech: ['Python', 'TypeScript', 'Machine Learning'],
-      categories: ['AI/ML', 'Data'],
-      links: [
-        {
-          label: 'View on GitHub',
-          href: 'https://github.com/89Aman/Material-Demand-Forecasting',
-          type: 'github'
-        }
+      description: 'Demand forecasting system using time series and ML techniques to predict material requirements.',
+      fullDescription: [
+        'Time series forecasting for material/inventory demand',
+        'ML techniques for predictive analysis',
+        'Data-driven decision support system',
       ],
+      tech: ['TypeScript', 'Python', 'ML Forecasting'],
+      github: 'https://github.com/89Aman/Material-Demand-Forecasting',
       featured: false,
+      category: ['AI/ML', 'Data Science'],
+    },
+    {
+      title: 'Text Classification',
+      description: 'SVM-based text classifier predicting IAB content categories. Clean sklearn pipeline with TF-IDF.',
+      fullDescription: [
+        'Support Vector Machine classifier trained on IAB content taxonomy',
+        'Feature engineering with TF-IDF vectorization',
+        'Model serialization with joblib for API serving',
+        'Metrics: precision, recall, F1 reported per category',
+      ],
+      tech: ['Python', 'scikit-learn', 'pandas', 'joblib', 'SVM', 'TF-IDF'],
+      github: 'https://github.com/89Aman/text-classification-model',
+      featured: false,
+      category: ['AI/ML', 'ML Engineering'],
+    },
+    {
+      title: 'SortViz',
+      description: 'Interactive sorting algorithm visualizer in vanilla JS. Watch bubble, merge, quick sort animate in real time.',
+      fullDescription: [
+        'Visual demonstration of common sorting algorithms',
+        'Bubble sort, merge sort, quick sort implementations',
+        'Step-by-step animation for learning',
+      ],
+      tech: ['JavaScript', 'HTML', 'CSS', 'Algorithms'],
+      github: 'https://github.com/89Aman/SortViz',
+      featured: false,
+      category: ['Algorithms', 'Tools'],
+    },
+    {
+      title: 'Library Management',
+      description: 'Full-stack web app for managing books, users, and borrowing records with Flask + MongoDB.',
+      fullDescription: [
+        'Flask web framework + MongoDB via pymongo',
+        'User authentication with bcrypt password hashing',
+        'CRUD operations for books and borrowing records',
+        'Role-based access (admin vs. member)',
+      ],
+      tech: ['Python', 'Flask', 'MongoDB', 'pymongo', 'bcrypt'],
+      github: 'https://github.com/89Aman/library-mangement-system',
+      featured: false,
+      category: ['Full-Stack', 'Backend'],
     },
   ];
 
-  filters: string[] = ['All'];
-  activeFilter = 'All';
-  featuredCount = this.projects.filter(project => project.featured).length;
-  totalCount = this.projects.length;
+  filteredProjects = signal<Project[]>(this.projects);
 
-  constructor() {
-    const categorySet = new Set<string>();
-    this.projects.forEach(project => {
-      project.categories.forEach(category => categorySet.add(category));
-    });
-    this.filters = ['All', ...Array.from(categorySet)];
-  }
-
-  get filteredProjects(): Project[] {
-    if (this.activeFilter === 'All') {
-      return this.projects;
+  filterProjects(filter: string) {
+    this.activeFilter.set(filter);
+    if (filter === 'All') {
+      this.filteredProjects.set(this.projects);
+    } else {
+      this.filteredProjects.set(
+        this.projects.filter(p => p.category.includes(filter))
+      );
     }
-
-    return this.projects.filter(project => project.categories.includes(this.activeFilter));
-  }
-
-  setFilter(filter: string) {
-    this.activeFilter = filter;
   }
 }
