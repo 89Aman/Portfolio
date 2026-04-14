@@ -117,19 +117,22 @@ Layout: 3-column card grid on desktop, 1-column on mobile
 Each card: title, 2-line description, tech badges, GitHub link icon, Live Demo button (if available), project category tag
 
 FEATURED (pinned top row):
-  Card 1: Knowledge Vault
-  Card 2: CampusFix
-  Card 3: RAG-DEMO
+  Card 1: Parivesh 3.0 (Environmental Clearance Workflow)
+  Card 2: Knowledge Vault
+  Card 3: CampusFix
 
 SECOND ROW:
-  Card 4: SkillSnap
-  Card 5: Fullstack Movie Recommendation System
-  Card 6: Material Demand Forecasting
+  Card 4: RAG-DEMO
+  Card 5: SkillSnap
+  Card 6: Fullstack Movie Recommendation System
 
 THIRD ROW:
-  Card 7: Text Classification Model
-  Card 8: SortViz
-  Card 9: Library Management System
+  Card 7: Material Demand Forecasting
+  Card 8: Text Classification Model
+  Card 9: SortViz
+
+FOURTH ROW:
+  Card 10: Library Management System
 
 (See Section 3 for complete project details for each card)
 
@@ -214,7 +217,7 @@ Place in the right column of the About section.
 
 | Icon | Value | Label |
 |------|-------|-------|
-| 🛠️ | 3+ | Major Projects |
+| 🛠️ | 4 | Major Projects |
 | 🏆 | 4 | Certifications |
 | 🐙 | 24 | GitHub Repos |
 | ☁️ | 2 | Cloud Platforms (GCP + AWS) |
@@ -298,7 +301,21 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
 
 ---
 
-### PROJECT 1 — Knowledge Vault ⭐ FEATURED
+### PROJECT 1 — Parivesh 3.0 ⭐ FEATURED (GovTech)
+**GitHub**: https://github.com/89Aman/Parivesh-3.0
+**Description card text**: Environmental Clearance workflow engine with React + FastAPI. Multi-role dashboards, AI-generated Gist/MoM docs, and Supabase PostgreSQL backing.
+**Full description**:
+  - Decoupled React (Vite + Tailwind) frontend with role-isolated dashboards for Admin, Project Proponent, Scrutiny, and MoM teams
+  - FastAPI backend with async SQLAlchemy + Supabase PostgreSQL enforcing a finite-state machine for the EC lifecycle and RBAC guarded endpoints
+  - AI auto-gist generation for meeting briefs using Google's Generative AI; OpenAPI docs + JWT authentication for secure integrations
+  - Docker + Cloud Build artifacts for Cloud Run deployment; demo credentials for each role included in repo
+**Tech Badges**: React · Vite · TailwindCSS · FastAPI · PostgreSQL · Supabase · SQLAlchemy · JWT · Google GenAI
+**Category Tags**: Full-Stack · GovTech · AI/ML
+**Status**: Production-ready demo / Hackathon build
+
+---
+
+### PROJECT 2 — Knowledge Vault ⭐ FEATURED
 **GitHub**: https://github.com/89Aman/Knowledge-vault
 **Description card text** (2 lines max): Personal semantic search engine with RAG pipeline. Processes PDFs, Markdown, and text with 384-dim embeddings and Gemini AI answer synthesis.
 **Full description** (for case study / expanded card):
@@ -313,7 +330,7 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
 
 ---
 
-### PROJECT 2 — CampusFix ⭐ FEATURED
+### PROJECT 3 — CampusFix ⭐ FEATURED
 **GitHub**: https://github.com/89Aman/CampusFix
 **Description card text**: Smart campus facility management platform with Flutter mobile app and Angular admin dashboard. Built for GDG Solution Challenge.
 **Full description**:
@@ -328,7 +345,7 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
 
 ---
 
-### PROJECT 3 — RAG-DEMO (FDA Drug Assistant) ⭐ FEATURED
+### PROJECT 4 — RAG-DEMO (FDA Drug Assistant) ⭐ FEATURED
 **GitHub**: https://github.com/89Aman/RAG-DEMO
 **Description card text**: Transforms static FDA drug label PDFs into an interactive conversational interface using Google's RAG architecture and Gemini 2.5 Flash.
 **Full description**:
@@ -342,7 +359,7 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
 
 ---
 
-### PROJECT 4 — SkillSnap
+### PROJECT 5 — SkillSnap
 **GitHub**: https://github.com/89Aman/SkillSnap
 **Description card text**: AI-powered skill assessment platform with live code execution. Built in 24hrs for The Forge Hackathon. Uses Gemini API for evaluation and Piston API for running code.
 **Full description**:
@@ -357,7 +374,7 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
 
 ---
 
-### PROJECT 5 — Fullstack Movie Recommendation System
+### PROJECT 6 — Fullstack Movie Recommendation System
 **GitHub**: https://github.com/89Aman/Fullstack-movie-recommendation-system
 **Description card text**: Flutter frontend with a TensorFlow-powered movie recommendation model. Demonstrates ML model integration into a cross-platform mobile app.
 **Full description**:
@@ -366,18 +383,20 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
   - Full pipeline: data preprocessing → model training → API serving → mobile UI
 **Tech Badges**: Flutter · TensorFlow · Python · Jupyter Notebook · Dart
 **Category Tags**: AI/ML · Full-Stack · Mobile
+**Status**: Open Source (model + Flutter demo)
 
 ---
 
-### PROJECT 6 — Material Demand Forecasting
+### PROJECT 7 — Material Demand Forecasting
 **GitHub**: https://github.com/89Aman/Material-Demand-Forecasting
 **Description card text**: Demand forecasting system for materials/inventory. Applies time series and ML techniques to predict future material requirements.
 **Tech Badges**: TypeScript · Python · ML Forecasting
 **Category Tags**: AI/ML · Data Science
+**Status**: Research / In Progress
 
 ---
 
-### PROJECT 7 — Text Classification Model
+### PROJECT 8 — Text Classification Model
 **GitHub**: https://github.com/89Aman/text-classification-model
 **Description card text**: SVM-based text classifier that predicts IAB content categories for articles. Clean pipeline using scikit-learn, pandas, and joblib for model serialization.
 **Full description**:
@@ -387,19 +406,21 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
   - Metrics: precision, recall, F1 reported per category
 **Tech Badges**: Python · scikit-learn · pandas · joblib · SVM · TF-IDF
 **Category Tags**: AI/ML · ML Engineering
+**Status**: Completed (Open Source)
 
 ---
 
-### PROJECT 8 — SortViz
+### PROJECT 9 — SortViz
 **GitHub**: https://github.com/89Aman/SortViz
 **Description card text**: Interactive sorting algorithm visualizer built in vanilla JavaScript. Watch bubble sort, merge sort, quick sort, and more animate step-by-step in real time.
 **Tech Badges**: JavaScript · HTML · CSS · Algorithms
 **Category Tags**: Algorithms · Tools
 **Note for card**: Great for showing CS fundamentals and frontend skills side by side.
+**Status**: Open Source Demo
 
 ---
 
-### PROJECT 9 — Library Management System
+### PROJECT 10 — Library Management System
 **GitHub**: https://github.com/89Aman/library-mangement-system
 **Description card text**: Full-stack web app for managing books, users, and borrowing records. Built with Flask + MongoDB with bcrypt authentication.
 **Full description**:
@@ -409,6 +430,7 @@ All GitHub links are real. Add screenshots from your repos or record a demo vide
   - Role-based access (admin vs. member)
 **Tech Badges**: Python · Flask · MongoDB · pymongo · bcrypt · HTML
 **Category Tags**: Full-Stack · Backend
+**Status**: Completed (Open Source)
 
 ---
 
@@ -506,7 +528,7 @@ All real links are pre-filled. Only the ☐ items need your action.
 ### Action Items
 - ☐ Add your profile photo to `/public/avatar.jpg`
 - ☐ Record short demo GIFs for Knowledge Vault and CampusFix → `/public/projects/`
-- ☐ Take screenshots of all 9 projects for card thumbnails
+- ☐ Take screenshots of all 10 projects for card thumbnails
 - ☐ Upload resume PDF → `/public/Aman_Sharma_Resume.pdf`
 - ☐ Create OG image (1200×630px) → `/public/og-image.png`
 - ☐ Add project READMEs on GitHub if missing (improves SEO and portfolio credibility)
@@ -520,7 +542,7 @@ All real links are pre-filled. Only the ☐ items need your action.
 ### Quick Wins for Credibility
 - ☐ Pin top 6 repos on GitHub profile (Knowledge Vault, CampusFix, RAG-DEMO, SkillSnap, text-classification-model, Fullstack-movie-recommendation)
 - ☐ Fill in GitHub profile bio with your one-liner from Section 2.1
-- ☐ Add topics to each repo (already done for most — verify all 9 portfolio projects have relevant topics)
+- ☐ Add topics to each repo (already done for most — verify all 10 portfolio projects have relevant topics)
 - ☐ Update LinkedIn headline to match portfolio one-liner
 
 ---
