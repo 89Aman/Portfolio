@@ -74,7 +74,7 @@ Two-column layout:
   Left: Profile photo with subtle teal glow border animation on hover
   Right: Bio paragraph (see Section 2.2 for exact copy)
 Below bio: Four stat cards in a row:
-  "3 Major Projects" | "4 Certifications" | "24 GitHub Repos" | "2 Cloud Platforms"
+  "4 Major Projects" | "4 Certifications" | "24 GitHub Repos" | "2 Cloud Platforms"
 Below stats: Values row of pill badges:
   RAG / LLMs · FastAPI · GCP · AWS · Docker · ML Engineering · Open Source · Hackathons
 

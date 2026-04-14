@@ -33,7 +33,7 @@ export class AboutComponent {
   readonly Heart = Heart;
 
   stats = [
-    { icon: Rocket, value: '3+', label: 'Major Projects' },
+    { icon: Rocket, value: '4', label: 'Major Projects' },
     { icon: Heart, value: '4', label: 'Certifications' },
     { icon: Code2, value: '24', label: 'GitHub Repos' },
     { icon: Cloud, value: '2', label: 'Cloud Platforms' },
