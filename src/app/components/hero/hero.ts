@@ -14,7 +14,7 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   readonly roles = [
     'RAG Systems Builder',
-    'FastAPI Backend Engineer',
+    'Backend Engineer',
     'Cloud-Native Developer',
     'GCP + AWS Practitioner',
   ];
@@ -25,11 +25,11 @@ export class HeroComponent implements OnInit, OnDestroy {
   readonly Linkedin = Linkedin;
   readonly Mail = Mail;
   readonly Terminal = Terminal;
-
+  readonly EMAIL_ADDRESS = "shasarita23@gmail.com";
   socialLinks = [
     { icon: Github, href: 'https://github.com/89Aman', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/sharmaaman26', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:shasarita23@gmail.com', label: 'Email' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/sharmaaman012/', label: 'LinkedIn' },
+    { icon: Mail, href: `mailto:${this.EMAIL_ADDRESS}`, label: 'Email' },
   ];
 
   displayRole = signal('');
@@ -40,10 +40,10 @@ export class HeroComponent implements OnInit, OnDestroy {
   terminalLines = [
     { prompt: '$', command: 'aman --status', output: null },
     { prompt: '>', command: 'Name:     Aman Sharma', output: null },
-    { prompt: '>', command: 'Role:     Python Dev & ML Engineer', output: null },
+    { prompt: '>', command: 'Role:     Python Dev & Cloud Engineer', output: null },
     { prompt: '>', command: 'Location: Raipur, CG, India', output: null },
-    { prompt: '>', command: 'Stack:    FastAPI · GCP · Gemini AI · RAG', output: null },
-    { prompt: '>', command: 'Status:   Open to internships & collabs', output: null },
+    { prompt: '>', command: 'Stack:    FastAPI · GCP · Angular · RAG systems', output: null },
+    { prompt: '>', command: 'Status:   Open to internships & full-time roles', output: null },
     { prompt: '>', command: 'Org:      Noventra-labs', output: null },
   ];
 
