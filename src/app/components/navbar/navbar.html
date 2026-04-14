@@ -1,61 +1,88 @@
-<nav class="navbar fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-  [ngClass]="isScrolled ? 'bg-[#171717]/95 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'">
+<nav
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  [class.glass]="isScrolled()"
+  [class.bg-transparent]="!isScrolled()"
+  [class.border-b]="isScrolled()"
+  [class.border-[#2A2A35]]="isScrolled()">
 
-  <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-4">
-    <div class="flex items-center justify-between">
+  <div class="w-full max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex items-center justify-between h-20">
       <!-- Logo -->
-      <a href="#home" (click)="scrollToSection($event, '#home')" class="text-2xl font-bold text-white relative group">
-        <span class="relative z-10">AS</span>
-        <span
-          class="absolute inset-0 bg-white/5 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></span>
+      <a href="#home" (click)="scrollToSection($event, '#home')"
+        class="text-xl font-mono text-[#4F98A3] relative group">
+        <span class="flex items-center gap-2">
+          <lucide-icon [name]="Terminal" [size]="20"></lucide-icon>
+          <span>aman.dev</span>
+        </span>
       </a>
 
       <!-- Desktop Navigation -->
-      <ul class="hidden md:flex items-center gap-8">
+      <ul class="hidden md:flex items-center gap-2">
         @for (link of navLinks; track link.name) {
-        <li>
-          <a [href]="link.href" (click)="scrollToSection($event, link.href)" class="nav-link text-sm font-medium py-1"
-            [ngClass]="activeSection === link.href.replace('#', '') ? 'text-white active' : 'text-[#a3a3a3] hover:text-white'">
-            {{ link.name }}
-          </a>
-        </li>
+          <li>
+            <a [href]="link.href" (click)="scrollToSection($event, link.href)"
+              class="px-4 py-2 text-sm font-medium transition-colors"
+              [class.text-white]="activeSection() === link.href.replace('#', '')"
+              [class.text-[#797876]]="activeSection() !== link.href.replace('#', '')"
+              [class.hover.text-white]="activeSection() !== link.href.replace('#', '')">
+              {{ link.name }}
+            </a>
+          </li>
         }
-        <li>
-          <a href="https://mail.google.com/mail/?view=cm&to=shasarita23@gmail.com"
-            class="nav-cta px-5 py-2 bg-white text-[#171717] rounded-full text-sm font-semibold hover:scale-105 active:scale-95 transition-transform block">
-            Get in Touch
+        <li class="pl-4 flex items-center gap-2">
+          <a href="https://github.com/89Aman" target="_blank"
+            class="text-[#797876] hover:text-white transition-colors" aria-label="GitHub">
+            <lucide-icon [name]="Github" [size]="20"></lucide-icon>
+          </a>
+          <a href="https://linkedin.com/in/sharmaaman26" target="_blank"
+            class="text-[#797876] hover:text-white transition-colors" aria-label="LinkedIn">
+            <lucide-icon [name]="Linkedin" [size]="20"></lucide-icon>
+          </a>
+          <a href="mailto:shasarita23@gmail.com"
+            class="px-4 py-2 bg-[#4F98A3] text-[#0D0D12] rounded-md text-sm font-semibold hover:bg-[#6DBF8F] transition-colors">
+            Let's Talk
           </a>
         </li>
       </ul>
 
       <!-- Mobile Menu Button -->
-      <button class="md:hidden text-white p-2 relative" (click)="toggleMobileMenu()"
-        [ngClass]="isMobileMenuOpen ? 'hamburger-active' : ''">
-        <lucide-icon [name]="isMobileMenuOpen ? X : Menu" [size]="24"></lucide-icon>
+      <button class="md:hidden text-white p-2" (click)="toggleMobileMenu()" aria-label="Toggle menu">
+        <lucide-icon [name]="isMobileMenuOpen() ? X : Menu" [size]="24"></lucide-icon>
       </button>
     </div>
 
     <!-- Mobile Navigation -->
-    @if (isMobileMenuOpen) {
-    <div class="mobile-menu md:hidden mt-4 pb-4 border-t border-[#333333] pt-4">
-      <ul class="flex flex-col gap-4">
-        @for (link of navLinks; track link.name) {
-        <li>
-          <a [href]="link.href" (click)="scrollToSection($event, link.href)"
-            class="block text-sm font-medium transition-colors duration-300 py-2"
-            [ngClass]="activeSection === link.href.replace('#', '') ? 'text-white' : 'text-[#a3a3a3]'">
-            {{ link.name }}
-          </a>
-        </li>
-        }
-        <li class="pt-2">
-          <a href="https://mail.google.com/mail/?view=cm&to=shasarita23@gmail.com"
-            class="inline-block px-5 py-2 bg-white text-[#171717] rounded-full text-sm font-semibold hover:scale-105 transition-transform">
-            Get in Touch
-          </a>
-        </li>
-      </ul>
-    </div>
+    @if (isMobileMenuOpen()) {
+      <div class="md:hidden py-4 border-t border-[#2A2A35]">
+        <ul class="flex flex-col gap-2">
+          @for (link of navLinks; track link.name) {
+            <li>
+              <a [href]="link.href" (click)="scrollToSection($event, link.href)"
+                class="block px-4 py-3 text-sm font-medium rounded-md transition-colors"
+                [class.bg-[#1A1A24].text-white]="activeSection() === link.href.replace('#', '')"
+                [class.text-[#797876].hover.text-white]="activeSection() !== link.href.replace('#', '')">
+                {{ link.name }}
+              </a>
+            </li>
+          }
+          <li class="pt-2 px-4 flex gap-2">
+            <a href="https://github.com/89Aman" target="_blank"
+              class="p-2 text-[#797876] hover:text-white transition-colors">
+              <lucide-icon [name]="Github" [size]="20"></lucide-icon>
+            </a>
+            <a href="https://linkedin.com/in/sharmaaman26" target="_blank"
+              class="p-2 text-[#797876] hover:text-white transition-colors">
+              <lucide-icon [name]="Linkedin" [size]="20"></lucide-icon>
+            </a>
+          </li>
+          <li class="pt-2 px-4">
+            <a href="mailto:shasarita23@gmail.com"
+              class="inline-block w-full text-center px-4 py-2 bg-[#4F98A3] text-[#0D0D12] rounded-md text-sm font-semibold">
+              Let's Talk
+            </a>
+          </li>
+        </ul>
+      </div>
     }
   </div>
 </nav>

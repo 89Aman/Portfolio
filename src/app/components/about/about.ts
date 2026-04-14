@@ -1,7 +1,19 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Rocket, Users, Heart } from 'lucide-angular';
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { LucideAngularModule, Rocket, Users, Heart, Code2, Database, Cloud, Terminal, Wrench } from 'lucide-angular';
+
+interface LanguageSkill {
+  name: string;
+  level: number;
+}
+
+interface Category {
+  icon: any;
+  name: string;
+  color: string;
+  languageSkills?: LanguageSkill[];
+  toolSkills?: string[];
+}
 
 @Component({
   selector: 'app-about',
@@ -9,45 +21,70 @@ import { trigger, transition, style, animate, query, stagger } from '@angular/an
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './about.html',
   styleUrl: './about.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('reveal', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(50px)' }),
-        animate('600ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ]),
-    trigger('staggerSkills', [
-      transition(':enter', [
-        query('.skill-tag', [
-          style({ opacity: 0, transform: 'scale(0.8)' }),
-          stagger(50, [
-            animate('400ms cubic-bezier(0.175, 0.885, 0.32, 1.275)', style({ opacity: 1, transform: 'scale(1)' }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ]
 })
 export class AboutComponent {
+  readonly Code2 = Code2;
+  readonly Database = Database;
+  readonly Cloud = Cloud;
+  readonly Terminal = Terminal;
+  readonly Wrench = Wrench;
   readonly Rocket = Rocket;
   readonly Users = Users;
   readonly Heart = Heart;
 
-  skills = [
-    { category: 'Languages', items: ['Python', 'Java', 'C++', 'C'] },
-    { category: 'ML/AI', items: ['Scikit-learn', 'Pandas', 'NumPy'] },
-    { category: 'Web Frameworks', items: ['Django', 'Flask', 'FastAPI'] },
-    { category: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'] },
-    { category: 'Cloud & DevOps', items: ['AWS', 'Azure', 'GCP', 'Docker', 'Terraform'] },
-    { category: 'Tools', items: ['Git', 'Postman', 'Nginx'] },
+  stats = [
+    { icon: Rocket, value: '3+', label: 'Major Projects' },
+    { icon: Heart, value: '4', label: 'Certifications' },
+    { icon: Code2, value: '24', label: 'GitHub Repos' },
+    { icon: Cloud, value: '2', label: 'Cloud Platforms' },
   ];
 
-  highlights = [
-    { icon: Rocket, text: 'Working on Self-Development' },
-    { icon: Users, text: 'Open to ML Collaborations' },
-    { icon: Heart, text: 'Mozilla Common Voice Contributor' },
+  skillCategories: Category[] = [
+    {
+      icon: Terminal,
+      name: 'Languages',
+      color: '#4F98A3',
+      languageSkills: [
+        { name: 'Python', level: 95 },
+        { name: 'SQL', level: 70 },
+        { name: 'Dart', level: 40 },
+        { name: 'TypeScript', level: 45 },
+      ],
+    },
+    {
+      icon: Code2,
+      name: 'Frameworks',
+      color: '#6DBF8F',
+      toolSkills: ['FastAPI', 'Angular 17', 'Flutter', 'Flask', 'PyTorch', 'scikit-learn'],
+    },
+    {
+      icon: Database,
+      name: 'Data & AI/ML',
+      color: '#8B7EC8',
+      toolSkills: ['RAG Architectures', 'Semantic Search', 'Gemini AI', 'ChromaDB', 'Pandas', 'NumPy', 'LangChain'],
+    },
+    {
+      icon: Cloud,
+      name: 'Cloud & DevOps',
+      color: '#F59E42',
+      toolSkills: ['GCP (Cloud Run, Vertex AI)', 'AWS (EC2, S3, Lambda)', 'Docker', 'GitHub Actions', 'Linux'],
+    },
+    {
+      icon: Wrench,
+      name: 'Databases & Tools',
+      color: '#E879F9',
+      toolSkills: ['PostgreSQL', 'MongoDB', 'MySQL', 'Supabase', 'Git', 'Postman', 'JWT', 'Authlib'],
+    },
   ];
 
-  hoveredSkill: string | null = null;
+  values = [
+    'RAG / LLMs',
+    'FastAPI',
+    'GCP',
+    'AWS',
+    'Docker',
+    'ML Engineering',
+    'Open Source',
+    'Hackathons',
+  ];
 }

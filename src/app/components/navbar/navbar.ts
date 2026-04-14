@@ -1,7 +1,6 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Menu, X, Sparkles } from 'lucide-angular';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { LucideAngularModule, Menu, X, Terminal, Github, Linkedin } from 'lucide-angular';
 
 @Component({
   selector: 'app-navbar',
@@ -9,37 +8,22 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
-  animations: [
-    trigger('mobileMenu', [
-      transition(':enter', [
-        style({ height: 0, opacity: 0 }),
-        animate('300ms ease-out', style({ height: '*', opacity: 1 }))
-      ]),
-      transition(':leave', [
-        style({ height: '*', opacity: 1 }),
-        animate('300ms ease-in', style({ height: 0, opacity: 0 }))
-      ])
-    ]),
-    trigger('fadeInDown', [
-      transition(':enter', [
-        style({ transform: 'translateY(-100%)' }),
-        animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', style({ transform: 'translateY(0)' }))
-      ])
-    ])
-  ]
 })
 export class NavbarComponent implements OnInit {
-  isScrolled = false;
-  isMobileMenuOpen = false;
-  activeSection = 'home';
+  isScrolled = signal(false);
+  isMobileMenuOpen = signal(false);
+  activeSection = signal('home');
+
   readonly Menu = Menu;
   readonly X = X;
-  readonly Sparkles = Sparkles;
+  readonly Terminal = Terminal;
+  readonly Github = Github;
+  readonly Linkedin = Linkedin;
 
   navLinks = [
-    { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Skills', href: '#skills' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -54,7 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   private checkScroll() {
-    this.isScrolled = window.scrollY > 50;
+    this.isScrolled.set(window.scrollY > 50);
   }
 
   private detectActiveSection() {
@@ -64,7 +48,7 @@ export class NavbarComponent implements OnInit {
       if (element) {
         const rect = element.getBoundingClientRect();
         if (rect.top <= 100) {
-          this.activeSection = section;
+          this.activeSection.set(section);
           break;
         }
       }
@@ -72,26 +56,18 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    this.isMobileMenuOpen.update(v => !v);
   }
 
   scrollToSection(event: Event, href: string) {
     event.preventDefault();
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
-
     if (element) {
-      const navbarHeight = 80; // offset for fixed navbar
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-
-      // Close mobile menu if open
-      this.isMobileMenuOpen = false;
+      const navbarHeight = 80;
+      const offsetPosition = element.getBoundingClientRect().top + window.scrollY - navbarHeight;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      this.isMobileMenuOpen.set(false);
     }
   }
 }
