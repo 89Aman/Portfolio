@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Github, Linkedin, Mail, Send, Globe } from 'lucide-angular';
+import { LucideAngularModule, Github, Linkedin, Mail, Send, Globe, CalendarCheck, ArrowRight } from 'lucide-angular';
 
 @Component({
   selector: 'app-contact',
@@ -15,6 +15,8 @@ export class ContactComponent {
   readonly Mail = Mail;
   readonly Send = Send;
   readonly Globe = Globe;
+  readonly CalendarCheck = CalendarCheck;
+  readonly ArrowRight = ArrowRight;
 
   contactMethods = [
     {
