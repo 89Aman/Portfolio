@@ -105,19 +105,6 @@ export class ProjectsComponent {
       category: ['AI/ML', 'Hackathon', 'Full-Stack'],
     },
     {
-      title: 'Movie Recommendation',
-      description: 'Flutter frontend with TensorFlow-powered collaborative filtering model for movie recommendations.',
-      fullDescription: [
-        'TensorFlow/Keras collaborative filtering recommendation model',
-        'Flutter frontend consuming the model via API',
-        'Full pipeline: data preprocessing → model training → API serving → mobile UI',
-      ],
-      tech: ['Flutter', 'TensorFlow', 'Python', 'Jupyter Notebook', 'Dart'],
-      github: 'https://github.com/89Aman/Fullstack-movie-recommendation-system',
-      featured: false,
-      category: ['AI/ML', 'Full-Stack', 'Mobile'],
-    },
-    {
       title: 'Material Demand Forecasting',
       description: 'Demand forecasting system using time series and ML techniques to predict material requirements.',
       fullDescription: [
