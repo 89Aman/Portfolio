@@ -12,7 +12,7 @@ import { LucideAngularModule, ArrowDown, Download, Github, Linkedin, Mail, Termi
 export class HeroComponent implements OnInit, OnDestroy {
   readonly RESUME_URL = 'https://drive.usercontent.google.com/u/0/uc?id=1LO0fVyxn3xZ_yaNzM4fX9Y1Dhz4KtrAY&export=download';
   readonly roles = [
-    'RAG Systems Builder',
+    'Software Engineer',
     'Backend Engineer',
     'Cloud-Native Developer',
     'GCP + AWS Practitioner',
